@@ -18,7 +18,7 @@ namespace BoardGameChallengeV1.Data
         public int BoardGameId { get; set; }
         [Required]
         public int TimesPlayed { get; set; }
-        public string? Review { get; set; }
+        public string Review { get; set; }
         [DefaultValue(false)]
         public bool IsReviewPrivate { get; set; }
         public double Rating { get; set; }
