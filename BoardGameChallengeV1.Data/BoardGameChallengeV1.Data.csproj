@@ -64,6 +64,14 @@
     <Compile Include="Migrations\202111022259506_InitialMigration.designer.cs">
       <DependentUpon>202111022259506_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111031212427_NewModels.cs" />
+    <Compile Include="Migrations\202111031212427_NewModels.designer.cs">
+      <DependentUpon>202111031212427_NewModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111031346008_Fixing User Errors.cs" />
+    <Compile Include="Migrations\202111031346008_Fixing User Errors.designer.cs">
+      <DependentUpon>202111031346008_Fixing User Errors.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +104,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111022259506_InitialMigration.resx">
       <DependentUpon>202111022259506_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111031212427_NewModels.resx">
+      <DependentUpon>202111031212427_NewModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111031346008_Fixing User Errors.resx">
+      <DependentUpon>202111031346008_Fixing User Errors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BoardGameChallengeV1.Data
 {
@@ -24,6 +24,9 @@ namespace BoardGameChallengeV1.Data
                 return FirstName + " " + LastName;
             }
         }
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUsers { get; set; }
+
         public virtual ICollection<Friend> User1Friends { get; set; }
         public virtual ICollection<Friend> User2Friends { get; set; }
         public virtual ICollection<Play> Plays { get; set; }
