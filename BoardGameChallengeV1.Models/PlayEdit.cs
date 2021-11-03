@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoardGameChallengeV1.Data
+namespace BoardGameChallengeV1.Models
 {
-    public class Play
+    public class PlayEdit
     {
-        [Key]
+        [Required]
         public int PlayId { get; set; }
-        [ForeignKey("User")]
+        [Required]
         public int UserId { get; set; }
-        [ForeignKey("BoardGame")]
+        [Required]
         public int BoardGameId { get; set; }
         public string Review { get; set; }
         public bool IsReviewPrivate { get; set; }
         public double Rating { get; set; }
-        public virtual ApplicationUser User { get; set; }
-        public virtual BoardGame BoardGame { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
@@ -11,6 +13,21 @@ namespace BoardGameChallengeV1.Data
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Key]
+        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+        public virtual ICollection<Friend> User1Friends { get; set; }
+        public virtual ICollection<Friend> User2Friends { get; set; }
+        public virtual ICollection<Play> Plays { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -46,6 +63,17 @@ namespace BoardGameChallengeV1.Data
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
+
+            modelBuilder.Entity<Friend>()
+                        .HasRequired(p => p.User1)
+                        .WithMany()
+                        .HasForeignKey(p => p.UserId2)
+                        .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Friend>()
+                        .HasRequired(p => p.User2)
+                        .WithMany()
+                        .HasForeignKey(p => p.UserId1)
+                        .WillCascadeOnDelete(false);
         }
     }
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
@@ -56,7 +84,7 @@ namespace BoardGameChallengeV1.Data
         }
     }
 
-    public class IdentityUserRoleConfiguration: EntityTypeConfiguration<IdentityUserRole>
+    public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
     {
         public IdentityUserRoleConfiguration()
         {

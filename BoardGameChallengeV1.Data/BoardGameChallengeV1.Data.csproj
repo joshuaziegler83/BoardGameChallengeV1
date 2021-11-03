@@ -60,6 +60,11 @@
     <Compile Include="BoardGame.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\202111022259506_InitialMigration.cs" />
+    <Compile Include="Migrations\202111022259506_InitialMigration.designer.cs">
+      <DependentUpon>202111022259506_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +92,11 @@
     <Content Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202111022259506_InitialMigration.resx">
+      <DependentUpon>202111022259506_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
