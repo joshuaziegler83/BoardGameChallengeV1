@@ -60,17 +60,9 @@
     <Compile Include="BoardGame.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202111022259506_InitialMigration.cs" />
-    <Compile Include="Migrations\202111022259506_InitialMigration.designer.cs">
-      <DependentUpon>202111022259506_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111031212427_NewModels.cs" />
-    <Compile Include="Migrations\202111031212427_NewModels.designer.cs">
-      <DependentUpon>202111031212427_NewModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111031346008_Fixing User Errors.cs" />
-    <Compile Include="Migrations\202111031346008_Fixing User Errors.designer.cs">
-      <DependentUpon>202111031346008_Fixing User Errors.cs</DependentUpon>
+    <Compile Include="Migrations\202111041804164_Initial Migration.cs" />
+    <Compile Include="Migrations\202111041804164_Initial Migration.designer.cs">
+      <DependentUpon>202111041804164_Initial Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
@@ -102,14 +94,8 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111022259506_InitialMigration.resx">
-      <DependentUpon>202111022259506_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111031212427_NewModels.resx">
-      <DependentUpon>202111031212427_NewModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111031346008_Fixing User Errors.resx">
-      <DependentUpon>202111031346008_Fixing User Errors.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111041804164_Initial Migration.resx">
+      <DependentUpon>202111041804164_Initial Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

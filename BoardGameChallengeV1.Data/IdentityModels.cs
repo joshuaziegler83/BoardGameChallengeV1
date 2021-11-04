@@ -13,8 +13,6 @@ namespace BoardGameChallengeV1.Data
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Key]
-        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName
@@ -24,9 +22,7 @@ namespace BoardGameChallengeV1.Data
                 return FirstName + " " + LastName;
             }
         }
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUsers { get; set; }
-
+        
         public virtual ICollection<Friend> User1Friends { get; set; }
         public virtual ICollection<Friend> User2Friends { get; set; }
         public virtual ICollection<Play> Plays { get; set; }

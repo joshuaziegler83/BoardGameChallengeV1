@@ -13,7 +13,7 @@ namespace BoardGameChallengeV1.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202111022259506_InitialMigration"; }
+            get { return "202111041804164_Initial Migration"; }
         }
         
         string IMigrationMetadata.Source

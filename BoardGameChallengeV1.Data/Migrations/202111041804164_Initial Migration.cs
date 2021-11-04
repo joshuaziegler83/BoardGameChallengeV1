@@ -14,6 +14,7 @@
                         BoardGameId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Rating = c.Double(nullable: false),
+                        TimesPlayed = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.BoardGameId);
             
@@ -22,16 +23,15 @@
                 c => new
                     {
                         PlayId = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
+                        UserId = c.String(maxLength: 128),
                         BoardGameId = c.Int(nullable: false),
-                        TimesPlayed = c.Int(nullable: false),
                         Review = c.String(),
                         IsReviewPrivate = c.Boolean(nullable: false),
                         Rating = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.PlayId)
                 .ForeignKey("dbo.BoardGame", t => t.BoardGameId, cascadeDelete: true)
-                .ForeignKey("dbo.ApplicationUser", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.ApplicationUser", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.BoardGameId);
             
@@ -39,7 +39,7 @@
                 "dbo.ApplicationUser",
                 c => new
                     {
-                        UserId = c.Int(nullable: false, identity: true),
+                        Id = c.String(nullable: false, maxLength: 128),
                         FirstName = c.String(),
                         LastName = c.String(),
                         Email = c.String(),
@@ -52,10 +52,9 @@
                         LockoutEndDateUtc = c.DateTime(),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        Id = c.String(),
                         UserName = c.String(),
                     })
-                .PrimaryKey(t => t.UserId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.IdentityUserClaim",
@@ -65,11 +64,11 @@
                         UserId = c.String(),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
-                        ApplicationUser_UserId = c.Int(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_UserId)
-                .Index(t => t.ApplicationUser_UserId);
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
                 "dbo.IdentityUserLogin",
@@ -78,11 +77,11 @@
                         UserId = c.String(nullable: false, maxLength: 128),
                         LoginProvider = c.String(),
                         ProviderKey = c.String(),
-                        ApplicationUser_UserId = c.Int(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_UserId)
-                .Index(t => t.ApplicationUser_UserId);
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
                 "dbo.IdentityUserRole",
@@ -90,13 +89,13 @@
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(),
-                        ApplicationUser_UserId = c.Int(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                         IdentityRole_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_UserId)
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
                 .ForeignKey("dbo.IdentityRole", t => t.IdentityRole_Id)
-                .Index(t => t.ApplicationUser_UserId)
+                .Index(t => t.ApplicationUser_Id)
                 .Index(t => t.IdentityRole_Id);
             
             CreateTable(
@@ -104,20 +103,20 @@
                 c => new
                     {
                         FriendId = c.Int(nullable: false, identity: true),
-                        UserId1 = c.Int(nullable: false),
-                        UserId2 = c.Int(nullable: false),
-                        ApplicationUser_UserId = c.Int(),
-                        ApplicationUser_UserId1 = c.Int(),
+                        UserId1 = c.String(nullable: false, maxLength: 128),
+                        UserId2 = c.String(nullable: false, maxLength: 128),
+                        ApplicationUser_Id = c.String(maxLength: 128),
+                        ApplicationUser_Id1 = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.FriendId)
                 .ForeignKey("dbo.ApplicationUser", t => t.UserId2)
                 .ForeignKey("dbo.ApplicationUser", t => t.UserId1)
-                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_UserId)
-                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_UserId1)
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id1)
                 .Index(t => t.UserId1)
                 .Index(t => t.UserId2)
-                .Index(t => t.ApplicationUser_UserId)
-                .Index(t => t.ApplicationUser_UserId1);
+                .Index(t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id1);
             
             CreateTable(
                 "dbo.IdentityRole",
@@ -134,22 +133,22 @@
         {
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
             DropForeignKey("dbo.Play", "UserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.Friend", "ApplicationUser_UserId1", "dbo.ApplicationUser");
-            DropForeignKey("dbo.Friend", "ApplicationUser_UserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.Friend", "ApplicationUser_Id1", "dbo.ApplicationUser");
+            DropForeignKey("dbo.Friend", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.Friend", "UserId1", "dbo.ApplicationUser");
             DropForeignKey("dbo.Friend", "UserId2", "dbo.ApplicationUser");
-            DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_UserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_UserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_UserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
+            DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
+            DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.Play", "BoardGameId", "dbo.BoardGame");
-            DropIndex("dbo.Friend", new[] { "ApplicationUser_UserId1" });
-            DropIndex("dbo.Friend", new[] { "ApplicationUser_UserId" });
+            DropIndex("dbo.Friend", new[] { "ApplicationUser_Id1" });
+            DropIndex("dbo.Friend", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.Friend", new[] { "UserId2" });
             DropIndex("dbo.Friend", new[] { "UserId1" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
-            DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_UserId" });
-            DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_UserId" });
-            DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_UserId" });
+            DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.Play", new[] { "BoardGameId" });
             DropIndex("dbo.Play", new[] { "UserId" });
             DropTable("dbo.IdentityRole");

@@ -12,8 +12,8 @@ namespace BoardGameChallengeV1.Data
     {
         [Key]
         public int FriendId { get; set; }
-        public int UserId1 { get; set; }
-        public int UserId2 { get; set; }
+        public string UserId1 { get; set; }
+        public string UserId2 { get; set; }
         public virtual ApplicationUser User1 { get; set; }
         public virtual ApplicationUser User2 { get; set; }
     }

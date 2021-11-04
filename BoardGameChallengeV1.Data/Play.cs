@@ -14,7 +14,7 @@ namespace BoardGameChallengeV1.Data
         [Key]
         public int PlayId { get; set; }
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("BoardGame")]
         public int BoardGameId { get; set; }
         public string Review { get; set; }
