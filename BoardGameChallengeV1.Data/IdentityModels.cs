@@ -37,7 +37,7 @@ namespace BoardGameChallengeV1.Data
         }
 
         public override IDbSet<ApplicationUser> Users { get; set; }
-        public DbSet<Friend> Friends { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Play> Plays { get; set; }
 
@@ -52,12 +52,12 @@ namespace BoardGameChallengeV1.Data
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
 
-            modelBuilder.Entity<Friend>()
+            modelBuilder.Entity<FriendRequest>()
                         .HasRequired(p => p.User1)
                         .WithMany()
                         .HasForeignKey(p => p.UserId2)
                         .WillCascadeOnDelete(false);
-            modelBuilder.Entity<Friend>()
+            modelBuilder.Entity<FriendRequest>()
                         .HasRequired(p => p.User2)
                         .WithMany()
                         .HasForeignKey(p => p.UserId1)

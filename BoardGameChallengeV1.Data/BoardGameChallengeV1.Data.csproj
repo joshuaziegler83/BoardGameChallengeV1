@@ -58,11 +58,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoardGame.cs" />
-    <Compile Include="Friend.cs" />
+    <Compile Include="FriendRequest.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Migrations\202111100121156_Fixed Users I guess.cs" />
     <Compile Include="Migrations\202111100121156_Fixed Users I guess.designer.cs">
       <DependentUpon>202111100121156_Fixed Users I guess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111100157446_Changed Friends To FriendRequests.cs" />
+    <Compile Include="Migrations\202111100157446_Changed Friends To FriendRequests.designer.cs">
+      <DependentUpon>202111100157446_Changed Friends To FriendRequests.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
@@ -97,6 +102,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111100121156_Fixed Users I guess.resx">
       <DependentUpon>202111100121156_Fixed Users I guess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111100157446_Changed Friends To FriendRequests.resx">
+      <DependentUpon>202111100157446_Changed Friends To FriendRequests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
