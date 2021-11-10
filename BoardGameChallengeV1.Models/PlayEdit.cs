@@ -12,7 +12,7 @@ namespace BoardGameChallengeV1.Models
         [Required]
         public int PlayId { get; set; }
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         [Required]
         public int BoardGameId { get; set; }
         public string Review { get; set; }

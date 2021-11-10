@@ -7,13 +7,13 @@ namespace BoardGameChallengeV1.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class FixedUsersIguess : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixedUsersIguess));
         
         string IMigrationMetadata.Id
         {
-            get { return "202111041804164_Initial Migration"; }
+            get { return "202111100121156_Fixed Users I guess"; }
         }
         
         string IMigrationMetadata.Source

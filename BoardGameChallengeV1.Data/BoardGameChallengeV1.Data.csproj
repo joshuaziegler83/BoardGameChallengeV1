@@ -60,13 +60,14 @@
     <Compile Include="BoardGame.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202111041804164_Initial Migration.cs" />
-    <Compile Include="Migrations\202111041804164_Initial Migration.designer.cs">
-      <DependentUpon>202111041804164_Initial Migration.cs</DependentUpon>
+    <Compile Include="Migrations\202111100121156_Fixed Users I guess.cs" />
+    <Compile Include="Migrations\202111100121156_Fixed Users I guess.designer.cs">
+      <DependentUpon>202111100121156_Fixed Users I guess.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -94,8 +95,8 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111041804164_Initial Migration.resx">
-      <DependentUpon>202111041804164_Initial Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111100121156_Fixed Users I guess.resx">
+      <DependentUpon>202111100121156_Fixed Users I guess.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

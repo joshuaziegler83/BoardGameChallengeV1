@@ -12,9 +12,11 @@ namespace BoardGameChallengeV1.Data
     {
         [Key]
         public int FriendId { get; set; }
-        public string UserId1 { get; set; }
-        public string UserId2 { get; set; }
-        public virtual ApplicationUser User1 { get; set; }
-        public virtual ApplicationUser User2 { get; set; }
+        [ForeignKey(nameof(User1))]
+        public Guid UserId1 { get; set; }
+        [ForeignKey(nameof(User2))]
+        public Guid UserId2 { get; set; }
+        public virtual User User1 { get; set; }
+        public virtual User User2 { get; set; }
     }
 }

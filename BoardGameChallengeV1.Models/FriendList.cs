@@ -9,7 +9,7 @@ namespace BoardGameChallengeV1.Models
     public class FriendList
     {
         public int FriendId { get; set; }
-        public int UserId1 { get; set; }
-        public int UserId2 { get; set; }
+        public Guid UserId1 { get; set; }
+        public Guid UserId2 { get; set; }
     }
 }

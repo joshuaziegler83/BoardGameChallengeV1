@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
@@ -13,20 +14,7 @@ namespace BoardGameChallengeV1.Data
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
-        
-        public virtual ICollection<Friend> User1Friends { get; set; }
-        public virtual ICollection<Friend> User2Friends { get; set; }
-        public virtual ICollection<Play> Plays { get; set; }
-
+     
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -48,6 +36,7 @@ namespace BoardGameChallengeV1.Data
             return new ApplicationDbContext();
         }
 
+        public override IDbSet<ApplicationUser> Users { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Play> Plays { get; set; }
