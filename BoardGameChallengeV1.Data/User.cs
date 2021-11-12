@@ -19,8 +19,8 @@ namespace BoardGameChallengeV1.Data
             }
         }
 
-        public virtual ICollection<FriendRequest> User1FriendRequests { get; set; }
-        public virtual ICollection<FriendRequest> User2FriendRequests { get; set; }
+        public virtual ICollection<Play> User1Plays { get; set; }
+        public virtual ICollection<Play> User2Plays { get; set; }
         public virtual ICollection<Play> Plays { get; set; }
     }
 }

@@ -36,10 +36,10 @@ namespace BoardGameChallengeV1.Data
             return new ApplicationDbContext();
         }
 
-        public override IDbSet<ApplicationUser> Users { get; set; }
-        public DbSet<FriendRequest> FriendRequests { get; set; }
-        public DbSet<BoardGame> BoardGames { get; set; }
+        public DbSet<User> Userers { get; set; }
         public DbSet<Play> Plays { get; set; }
+        public DbSet<BoardGame> BoardGames { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

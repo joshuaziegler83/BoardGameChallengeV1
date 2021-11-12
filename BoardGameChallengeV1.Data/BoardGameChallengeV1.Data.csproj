@@ -61,13 +61,9 @@
     <Compile Include="FriendRequest.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="Migrations\202111100121156_Fixed Users I guess.cs" />
-    <Compile Include="Migrations\202111100121156_Fixed Users I guess.designer.cs">
-      <DependentUpon>202111100121156_Fixed Users I guess.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111100157446_Changed Friends To FriendRequests.cs" />
-    <Compile Include="Migrations\202111100157446_Changed Friends To FriendRequests.designer.cs">
-      <DependentUpon>202111100157446_Changed Friends To FriendRequests.cs</DependentUpon>
+    <Compile Include="Migrations\202111120047464_Initial Migration.cs" />
+    <Compile Include="Migrations\202111120047464_Initial Migration.designer.cs">
+      <DependentUpon>202111120047464_Initial Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
@@ -100,11 +96,8 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111100121156_Fixed Users I guess.resx">
-      <DependentUpon>202111100121156_Fixed Users I guess.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111100157446_Changed Friends To FriendRequests.resx">
-      <DependentUpon>202111100157446_Changed Friends To FriendRequests.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111120047464_Initial Migration.resx">
+      <DependentUpon>202111120047464_Initial Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

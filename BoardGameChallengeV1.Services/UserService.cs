@@ -8,34 +8,32 @@ using System.Threading.Tasks;
 
 namespace BoardGameChallengeV1.Services
 {
-    public class PlayService
+    public class UserService
     {
         private readonly Guid _userId;
 
-        public PlayService(Guid userId)
+        public UserService(Guid userId)
         {
             _userId = userId;
         }
 
-        public bool CreatePlay(PlayCreate model)
+        public bool CreateUser(UserCreate model)
         {
             var entity =
-                new Play()
+                new User()
                 {
-                    UserId = _userId,
-                    BoardGameId = model.BoardGameId,
-                    Review = model.Review,
-                    IsReviewPrivate = model.IsReviewPrivate,
-                    Rating = model.Rating
+                    userId = _userId,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Plays.Add(entity);
+                ctx.Userers.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-
+        /*
         public IEnumerable<PlayList> GetAllPlays()
         {
             using (var ctx = new ApplicationDbContext())
@@ -65,7 +63,7 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .Plays
-                        .Where (e=> e.BoardGameId == BoardGameId)
+                        .Where(e => e.BoardGameId == BoardGameId)
                         .Select(
                             e =>
                                 new PlayList
@@ -113,5 +111,7 @@ namespace BoardGameChallengeV1.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        */
     }
 }
+

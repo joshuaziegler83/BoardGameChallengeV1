@@ -8,46 +8,67 @@ using System.Threading.Tasks;
 
 namespace BoardGameChallengeV1.Services
 {
-    public class PlayService
+    public class FriendRequestService
     {
         private readonly Guid _userId;
 
-        public PlayService(Guid userId)
+        public FriendRequestService(Guid userId)
         {
             _userId = userId;
         }
 
-        public bool CreatePlay(PlayCreate model)
+       public bool CreateFriendRequest(FriendRequestCreate model)
         {
             var entity =
-                new Play()
+                new FriendRequest()
                 {
-                    UserId = _userId,
-                    BoardGameId = model.BoardGameId,
-                    Review = model.Review,
-                    IsReviewPrivate = model.IsReviewPrivate,
-                    Rating = model.Rating
+                    FriendRequestId = model.FriendRequestId,
+                    UserId1 = model.UserId1,
+                    UserId2 = model.UserId2,
+                    IsAccepted = model.IsAccepted
                 };
-
+           entity.Messages.Add(model.Message);
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Plays.Add(entity);
+                ctx.FriendRequests.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public IEnumerable<PlayList> GetAllPlays()
+        public IEnumerable<FriendRequestList> GetAllFriendRequests()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                        .Plays
+                        .FriendRequests
                         .Select(
                             e =>
-                                new PlayList
+                                new FriendRequestList
                                 {
-                                    PlayId = e.PlayId,
+                                    FriendRequestId = e.FriendRequestId,
+                                    UserId1 = e.UserId1,
+                                    UserId2 = e.UserId2,
+                                    IsAccepted = e.IsAccepted,
+                                }
+                                );
+                return query.ToArray();
+            }
+        }
+        
+        /*public IEnumerable<FriendRequestList> GetFriendRequestsByUserId(_userId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .FriendRequests
+                        .Where(e => e.BoardGameId == BoardGameId)
+                        .Select(
+                            e =>
+                                new FriendRequestList
+                                {
+                                    FriendRequestId = e.FriendRequestId,
                                     UserId = e.UserId,
                                     BoardGameId = e.BoardGameId,
                                     Review = e.Review,
@@ -58,60 +79,35 @@ namespace BoardGameChallengeV1.Services
                 return query.ToArray();
             }
         }
-        public IEnumerable<PlayList> GetPlaysByBoardGameId(int BoardGameId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query =
-                    ctx
-                        .Plays
-                        .Where (e=> e.BoardGameId == BoardGameId)
-                        .Select(
-                            e =>
-                                new PlayList
-                                {
-                                    PlayId = e.PlayId,
-                                    UserId = e.UserId,
-                                    BoardGameId = e.BoardGameId,
-                                    Review = e.Review,
-                                    IsReviewPrivate = e.IsReviewPrivate,
-                                    Rating = e.Rating
-                                }
-                                );
-                return query.ToArray();
-            }
-        }
-
-        public bool UpdatePlay(PlayEdit model)
+*/
+        public bool UpdateFriendRequest(FriendRequestEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                    ctx
-                       .Plays
-                       .Single(e => e.BoardGameId == model.BoardGameId);
-                entity.PlayId = model.PlayId;
-                entity.UserId = model.UserId;
-                entity.BoardGameId = model.BoardGameId;
-                entity.Review = model.Review;
-                entity.IsReviewPrivate = model.IsReviewPrivate;
-                entity.Rating = model.Rating;
+                       .FriendRequests
+                       .Single(e => e.FriendRequestId == model.FriendRequestId);
+                entity.FriendRequestId = model.FriendRequestId;
+                entity.UserId1 = model.UserId1;
+                entity.UserId2 = model.UserId2;
+                entity.IsAccepted = model.IsAccepted;
                 return ctx.SaveChanges() == 1;
             }
-
         }
 
-        public bool DeletePlay(int BoardGameId)
+        public bool DeleteFriendRequest(int FriendRequestId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Plays
-                        .Single(e => e.BoardGameId == BoardGameId);
-                ctx.Plays.Remove(entity);
+                        .FriendRequests
+                        .Single(e => e.FriendRequestId == FriendRequestId);
+                ctx.FriendRequests.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
     }
 }
+
