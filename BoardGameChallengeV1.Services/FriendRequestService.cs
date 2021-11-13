@@ -78,6 +78,24 @@ namespace BoardGameChallengeV1.Services
             }
         }
 
+        public FriendRequestDetail GetFriendRequestByFriendRequestId(int friendRequestId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .FriendRequests
+                        .Single((e => e.FriendRequestId == friendRequestId));
+                return new FriendRequestDetail
+                {
+                    FriendRequestId = entity.FriendRequestId,
+                    UserId1 = entity.UserId1,
+                    UserId2 = entity.UserId2,
+                    IsAccepted = entity.IsAccepted
+                };
+            }
+        }
+
         public bool UpdateFriendRequest(FriendRequestEdit model)
         {
             using (var ctx = new ApplicationDbContext())

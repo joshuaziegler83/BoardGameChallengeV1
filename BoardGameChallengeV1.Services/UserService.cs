@@ -33,7 +33,7 @@ namespace BoardGameChallengeV1.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        
+
         public IEnumerable<UserList> GetAllUsers()
         {
             using (var ctx = new ApplicationDbContext())
@@ -53,24 +53,40 @@ namespace BoardGameChallengeV1.Services
                 return query.ToArray();
             }
         }
-        public IEnumerable<UserList> GetUserByUserId(Guid userId)
+        public UserDetail GetUserByUserId(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
+                var entity =
                     ctx
                         .Userers
-                        .Where(e => e.UserId == userId)
-                        .Select(
-                            e =>
-                                new UserList
-                                {
-                                    UserId = e.UserId,
-                                    FirstName = e.FirstName,
-                                    LastName = e.LastName
-                                }
-                                );
-                return query.ToArray();
+                        .Single((e => e.UserId == userId));
+                return new UserDetail
+                {
+                    UserId = entity.UserId,
+                    FirstName = entity.FirstName,
+                    LastName = entity.LastName
+                };
+            }
+        }
+
+        public PlayDetail GetPlay(int playId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Plays
+                        .Single((e => e.PlayId == playId));
+                return new PlayDetail
+                {
+                    PlayId = entity.PlayId,
+                    UserId = entity.UserId,
+                    BoardGameId = entity.BoardGameId,
+                    Review = entity.Review,
+                    IsReviewPrivate = entity.IsReviewPrivate,
+                    Rating = entity.Rating
+                };
             }
         }
 

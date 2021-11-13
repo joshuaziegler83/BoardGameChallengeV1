@@ -55,6 +55,24 @@ namespace BoardGameChallengeV1.Services
             }
         }
 
+        public MessageDetail GetMessageByMessageId(int messageId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Messages
+                        .Single((e => e.MessageId == messageId));
+                return new MessageDetail
+                {
+                    MessageId = entity.MessageId,
+                    UserId1 = entity.UserId1,
+                    UserId2 = entity.UserId2,
+                    Content = entity.Content
+                };
+            }
+        }
+
         public IEnumerable<MessageList> GetMessagesByUserId(Guid userId1)
         {
             using (var ctx = new ApplicationDbContext())
