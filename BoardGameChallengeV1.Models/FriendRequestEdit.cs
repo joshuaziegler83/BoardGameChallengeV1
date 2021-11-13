@@ -12,7 +12,6 @@ namespace BoardGameChallengeV1.Models
         public int FriendRequestId { get; set; }
         public Guid UserId1 { get; set; }
         public Guid UserId2 { get; set; }
-        public Message Message { get; set; }
         public bool IsAccepted { get; set; }
     }
 }

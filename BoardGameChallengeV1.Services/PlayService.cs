@@ -35,14 +35,34 @@ namespace BoardGameChallengeV1.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public PlayDetail GetPlay(int playId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Plays
+                        .Single((e => e.PlayId == playId));
+               return new PlayDetail
+                {
+                    PlayId = entity.PlayId,
+                    UserId = entity.UserId,
+                    BoardGameId = entity.BoardGameId,
+                    Review = entity.Review,
+                    IsReviewPrivate = entity.IsReviewPrivate,
+                    Rating = entity.Rating
+                };                                
+            }
+        }
 
-        public IEnumerable<PlayList> GetAllPlays()
+        public IEnumerable<PlayList> GetPlaysByBoardGameId(int BoardGameId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                         .Plays
+                        .Where (e=> e.BoardGameId == BoardGameId)
                         .Select(
                             e =>
                                 new PlayList
@@ -58,14 +78,15 @@ namespace BoardGameChallengeV1.Services
                 return query.ToArray();
             }
         }
-        public IEnumerable<PlayList> GetPlaysByBoardGameId(int BoardGameId)
+
+        public IEnumerable<PlayList> GetPlaysByUserId(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                         .Plays
-                        .Where (e=> e.BoardGameId == BoardGameId)
+                        .Where(e => e.UserId == userId)
                         .Select(
                             e =>
                                 new PlayList
@@ -98,17 +119,16 @@ namespace BoardGameChallengeV1.Services
                 entity.Rating = model.Rating;
                 return ctx.SaveChanges() == 1;
             }
-
         }
 
-        public bool DeletePlay(int BoardGameId)
+        public bool DeletePlay(int playId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                         .Plays
-                        .Single(e => e.BoardGameId == BoardGameId);
+                        .Single(e => e.PlayId == playId);
                 ctx.Plays.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

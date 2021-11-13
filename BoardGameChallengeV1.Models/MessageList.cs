@@ -1,5 +1,4 @@
-﻿using BoardGameChallengeV1.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BoardGameChallengeV1.Models
 {
-    public class FriendRequestDetail
+    public class MessageList
     {
-        public int FriendRequestId { get; set; }
+        public int MessageId { get; set; }
         public Guid UserId1 { get; set; }
         public Guid UserId2 { get; set; }
-        public bool IsAccepted { get; set; }
+        public string Content { get; set; }
     }
 }

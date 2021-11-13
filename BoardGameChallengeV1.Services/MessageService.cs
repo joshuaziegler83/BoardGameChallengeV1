@@ -8,104 +8,123 @@ using System.Threading.Tasks;
 
 namespace BoardGameChallengeV1.Services
 {
-    public class FriendRequestService
+    public class MessageService
     {
         private readonly Guid _userId;
 
-        public FriendRequestService(Guid userId)
+        public MessageService(Guid userId)
         {
             _userId = userId;
         }
 
-       public bool CreateFriendRequest(FriendRequestCreate model)
+        public bool CreateMessage(MessageCreate model)
         {
             var entity =
-                new FriendRequest()
+                new Message()
                 {
-                    FriendRequestId = model.FriendRequestId,
+                    MessageId = model.MessageId,
                     UserId1 = model.UserId1,
                     UserId2 = model.UserId2,
-                    IsAccepted = model.IsAccepted
+                    Content = model.Content
                 };
-           entity.Messages.Add(model.Message);
+
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.FriendRequests.Add(entity);
+                ctx.Messages.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-
-        public IEnumerable<FriendRequestList> GetAllFriendRequests()
+        public IEnumerable<MessageList> GetAllMessages()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                        .FriendRequests
+                        .Messages
                         .Select(
                             e =>
-                                new FriendRequestList
+                                new MessageList
                                 {
-                                    FriendRequestId = e.FriendRequestId,
+                                    MessageId = e.MessageId,
                                     UserId1 = e.UserId1,
                                     UserId2 = e.UserId2,
-                                    IsAccepted = e.IsAccepted,
+                                    Content = e.Content
                                 }
                                 );
                 return query.ToArray();
             }
         }
-        
-        public IEnumerable<FriendRequestList> GetFriendRequestsByUserId(Guid userId1)
+
+        public IEnumerable<MessageList> GetMessagesByUserId(Guid userId1)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                        .FriendRequests
+                        .Messages
                         .Where(e => e.UserId1 == userId1)
                         .Select(
                             e =>
-                                new FriendRequestList
+                                new MessageList
                                 {
-                                    FriendRequestId = e.FriendRequestId,
+                                    MessageId = e.MessageId,
                                     UserId1 = e.UserId1,
                                     UserId2 = e.UserId2,
-                                    IsAccepted = e.IsAccepted,
+                                    Content = e.Content
+                                }
+                                );
+                return query.ToArray();
+            }
+        }
+        public IEnumerable<MessageList> GetMessagesFromUser1ToUser2(Guid userId1, Guid userId2)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Messages
+                        .Where(e => e.UserId1 == userId1 && e.UserId2 == userId2)
+                        .Select(
+                            e =>
+                                new MessageList
+                                {
+                                    MessageId = e.MessageId,
+                                    UserId1 = e.UserId1,
+                                    UserId2 = e.UserId2,
+                                    Content = e.Content
                                 }
                                 );
                 return query.ToArray();
             }
         }
 
-        public bool UpdateFriendRequest(FriendRequestEdit model)
+        public bool UpdateMessage(MessageEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                    ctx
-                       .FriendRequests
-                       .Single(e => e.FriendRequestId == model.FriendRequestId);
-                entity.FriendRequestId = model.FriendRequestId;
+                       .Messages
+                       .Single(e => e.MessageId == model.MessageId);
+                entity.MessageId = model.MessageId;
                 entity.UserId1 = model.UserId1;
                 entity.UserId2 = model.UserId2;
-                entity.IsAccepted = model.IsAccepted;
+                entity.Content = model.Content;
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public bool DeleteFriendRequest(int FriendRequestId)
+        public bool DeleteMessage(int MessageId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .FriendRequests
-                        .Single(e => e.FriendRequestId == FriendRequestId);
-                ctx.FriendRequests.Remove(entity);
+                        .Messages
+                        .Single(e => e.MessageId == MessageId);
+                ctx.Messages.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
     }
 }
-

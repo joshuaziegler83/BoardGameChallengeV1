@@ -172,9 +172,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BoardGameController.cs" />
-    <Compile Include="Controllers\FriendController.cs" />
+    <Compile Include="Controllers\FriendRequestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -256,6 +257,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\BoardGame\" />
     <Folder Include="Views\Friend\" />
+    <Folder Include="Views\Message\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

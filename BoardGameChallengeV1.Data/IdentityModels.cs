@@ -40,6 +40,7 @@ namespace BoardGameChallengeV1.Data
         public DbSet<Play> Plays { get; set; }
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

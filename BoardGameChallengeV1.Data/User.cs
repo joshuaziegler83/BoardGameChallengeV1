@@ -8,7 +8,7 @@ namespace BoardGameChallengeV1.Data
 {
     public class User 
     {
-        public Guid userId { get; set; }
+        public Guid UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName

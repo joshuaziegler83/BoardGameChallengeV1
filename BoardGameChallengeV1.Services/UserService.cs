@@ -22,7 +22,7 @@ namespace BoardGameChallengeV1.Services
             var entity =
                 new User()
                 {
-                    userId = _userId,
+                    UserId = _userId,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                 };
@@ -33,85 +33,74 @@ namespace BoardGameChallengeV1.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        /*
-        public IEnumerable<PlayList> GetAllPlays()
+        
+        public IEnumerable<UserList> GetAllUsers()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                        .Plays
+                        .Userers
                         .Select(
                             e =>
-                                new PlayList
+                                new UserList
                                 {
-                                    PlayId = e.PlayId,
                                     UserId = e.UserId,
-                                    BoardGameId = e.BoardGameId,
-                                    Review = e.Review,
-                                    IsReviewPrivate = e.IsReviewPrivate,
-                                    Rating = e.Rating
+                                    FirstName = e.FirstName,
+                                    LastName = e.LastName,
                                 }
                                 );
                 return query.ToArray();
             }
         }
-        public IEnumerable<PlayList> GetPlaysByBoardGameId(int BoardGameId)
+        public IEnumerable<UserList> GetUserByUserId(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                        .Plays
-                        .Where(e => e.BoardGameId == BoardGameId)
+                        .Userers
+                        .Where(e => e.UserId == userId)
                         .Select(
                             e =>
-                                new PlayList
+                                new UserList
                                 {
-                                    PlayId = e.PlayId,
                                     UserId = e.UserId,
-                                    BoardGameId = e.BoardGameId,
-                                    Review = e.Review,
-                                    IsReviewPrivate = e.IsReviewPrivate,
-                                    Rating = e.Rating
+                                    FirstName = e.FirstName,
+                                    LastName = e.LastName
                                 }
                                 );
                 return query.ToArray();
             }
         }
 
-        public bool UpdatePlay(PlayEdit model)
+        public bool UpdateUser(UserEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                    ctx
-                       .Plays
-                       .Single(e => e.BoardGameId == model.BoardGameId);
-                entity.PlayId = model.PlayId;
+                       .Userers
+                       .Single(e => e.UserId == model.UserId);
                 entity.UserId = model.UserId;
-                entity.BoardGameId = model.BoardGameId;
-                entity.Review = model.Review;
-                entity.IsReviewPrivate = model.IsReviewPrivate;
-                entity.Rating = model.Rating;
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
                 return ctx.SaveChanges() == 1;
             }
-
         }
 
-        public bool DeletePlay(int BoardGameId)
+        public bool DeleteUser(Guid UserId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Plays
-                        .Single(e => e.BoardGameId == BoardGameId);
-                ctx.Plays.Remove(entity);
+                        .Userers
+                        .Single(e => e.UserId == UserId);
+                ctx.Userers.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-        */
     }
 }
 

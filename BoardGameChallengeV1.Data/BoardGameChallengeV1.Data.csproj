@@ -61,9 +61,9 @@
     <Compile Include="FriendRequest.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="Migrations\202111120047464_Initial Migration.cs" />
-    <Compile Include="Migrations\202111120047464_Initial Migration.designer.cs">
-      <DependentUpon>202111120047464_Initial Migration.cs</DependentUpon>
+    <Compile Include="Migrations\202111131540349_Finishing up services.cs" />
+    <Compile Include="Migrations\202111131540349_Finishing up services.designer.cs">
+      <DependentUpon>202111131540349_Finishing up services.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
@@ -96,8 +96,8 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111120047464_Initial Migration.resx">
-      <DependentUpon>202111120047464_Initial Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111131540349_Finishing up services.resx">
+      <DependentUpon>202111131540349_Finishing up services.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

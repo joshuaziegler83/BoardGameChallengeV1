@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace BoardGameChallengeV1.WebMVC.Controllers
 {
-    public class FriendController : Controller
+    public class MessageController : Controller
     {
-        // GET: Friend
+        // GET: Message
         public ActionResult Index()
         {
             return View();
