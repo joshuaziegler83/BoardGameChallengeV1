@@ -28,7 +28,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         // GET: Play By BoardGameId
-        public ActionResult IndexByBoardGameId(int boardGameId)
+        public ActionResult GetPlaysByBoardGameId(int boardGameId)
         {
             var service = CreatePlayService();
             var model = service.GetPlaysByBoardGameId(boardGameId);
@@ -36,7 +36,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         // GET: Details By PlayId
-        public ActionResult DetailsByPlayId(int playId)
+        public ActionResult Details(int playId)
         {
             var service = CreatePlayService();
             var model = service.GetPlaysByBoardGameId(playId);
@@ -124,7 +124,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public PlayService CreatePlayService()
+        private PlayService CreatePlayService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new PlayService(userId);

@@ -65,6 +65,10 @@
     <Compile Include="Migrations\202111131540349_Finishing up services.designer.cs">
       <DependentUpon>202111131540349_Finishing up services.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111132113210_Updated BoardGame Stuff.cs" />
+    <Compile Include="Migrations\202111132113210_Updated BoardGame Stuff.designer.cs">
+      <DependentUpon>202111132113210_Updated BoardGame Stuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +102,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111131540349_Finishing up services.resx">
       <DependentUpon>202111131540349_Finishing up services.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111132113210_Updated BoardGame Stuff.resx">
+      <DependentUpon>202111132113210_Updated BoardGame Stuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

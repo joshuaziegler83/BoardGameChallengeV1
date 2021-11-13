@@ -23,6 +23,7 @@ namespace BoardGameChallengeV1.Services
                 new BoardGame()
                 {
                     BoardGameId = model.BoardGameId,
+                    UserId = _userId,
                     Name = model.Name,
                     Rating = model.Rating,
                     TimesPlayed = model.TimesPlayed
@@ -41,11 +42,13 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .BoardGames
+                        .Where(e=> e.UserId == _userId)
                         .Select(
                             e =>
                                 new BoardGameList
                                 {
                                     BoardGameId = e.BoardGameId,
+                                    UserId = _userId,
                                     Name = e.Name,
                                     Rating = e.Rating,
                                     TimesPlayed = e.TimesPlayed
@@ -62,11 +65,12 @@ namespace BoardGameChallengeV1.Services
                 var entity =
                     ctx
                         .BoardGames
-                        .Single(e => e.BoardGameId == BoardGameId);
+                        .Single(e => e.BoardGameId == BoardGameId && e.UserId == _userId);
                 return
                     new BoardGameDetail
                     {
                         BoardGameId = entity.BoardGameId,
+                        UserId = _userId,
                         Name = entity.Name,
                         Rating = entity.Rating,
                         TimesPlayed = entity.TimesPlayed
@@ -81,8 +85,9 @@ namespace BoardGameChallengeV1.Services
                 var entity =
                    ctx
                        .BoardGames
-                       .Single(e => e.BoardGameId == model.BoardGameId);
+                       .Single(e => e.BoardGameId == model.BoardGameId && e.UserId == _userId);
                 entity.BoardGameId = model.BoardGameId;
+                entity.UserId = _userId;
                 entity.Name = model.Name;
                 entity.Rating = model.Rating;
                 entity.TimesPlayed = model.TimesPlayed;
@@ -98,7 +103,7 @@ namespace BoardGameChallengeV1.Services
                 var entity =
                     ctx
                         .BoardGames
-                        .Single(e => e.BoardGameId == BoardGameId);
+                        .Single(e => e.BoardGameId == BoardGameId && e.UserId == _userId);
                 ctx.BoardGames.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
