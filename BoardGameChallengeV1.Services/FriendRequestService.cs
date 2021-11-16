@@ -27,32 +27,11 @@ namespace BoardGameChallengeV1.Services
                     UserId2 = model.UserId2,
                     IsAccepted = model.IsAccepted
                 };
-           entity.Messages.Add(model.Message);
+            entity.Messages.Add(model.Message);
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.FriendRequests.Add(entity);
                 return ctx.SaveChanges() == 1;
-            }
-        }
-
-        public IEnumerable<FriendRequestList> GetAllFriendRequests()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query =
-                    ctx
-                        .FriendRequests
-                        .Select(
-                            e =>
-                                new FriendRequestList
-                                {
-                                    FriendRequestId = e.FriendRequestId,
-                                    UserId1 = e.UserId1,
-                                    UserId2 = e.UserId2,
-                                    IsAccepted = e.IsAccepted,
-                                }
-                                );
-                return query.ToArray();
             }
         }
         
