@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BoardGameChallengeV1.Models;
+using BoardGameChallengeV1.Services;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,44 +9,37 @@ using System.Web.Mvc;
 
 namespace BoardGameChallengeV1.WebMVC.Controllers
 {
+    [Authorize]
     public class UserController : Controller
-    {
-        // GET: User
-        public ActionResult Index()
-        {
-            return View();
-        }
-        /* [Authorize]
-    public class PlayController : Controller
     {
         private readonly Guid _userId;
 
-        public PlayController(Guid userId)
+        public UserController(Guid userId)
         {
             _userId = userId;
         }
 
-        // GET: Play
+        // GET: User
         public ActionResult Index()
         {
-            var service = CreatePlayService();
-            var model = service.GetPlaysByUserId(_userId);
+            var service = CreateUserService();
+            var model = service.GetUserByUserId(_userId);
             return View(model);
         }
 
-        // GET: Play By BoardGameId
-        public ActionResult GetPlaysByBoardGameId(int boardGameId)
+        // GET: All Users
+        public ActionResult GetAllUsers()
         {
-            var service = CreatePlayService();
-            var model = service.GetPlaysByBoardGameId(boardGameId);
+            var service = CreateUserService();
+            var model = service.GetAllUsers();
             return View(model);
         }
 
         // GET: Details By PlayId
-        public ActionResult Details(int playId)
+        public ActionResult Details(Guid userId)
         {
-            var service = CreatePlayService();
-            var model = service.GetPlaysByBoardGameId(playId);
+            var service = CreateUserService();
+            var model = service.GetUserByUserId(userId);
             return View(model);
         }
 
@@ -55,52 +51,48 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PlayCreate model)
+        public ActionResult Create(UserCreate model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var service = CreatePlayService();
-            if (service.CreatePlay(model))
+            var service = CreateUserService();
+            if (service.CreateUser(model))
                 return RedirectToAction("Index");
             else
             {
                 ModelState.AddModelError("", "You suck at this!");
                 return View(model);
             }
-
         }
 
         [HttpGet]
-        public ActionResult Edit(int playId)
+        public ActionResult Edit(Guid userId)
         {
-            var service = CreatePlayService();
-            var detail = service.GetPlay(playId);
-            var model = new PlayEdit
+            var service = CreateUserService();
+            var detail = service.GetUser(userId);
+            var model = new UserEdit
             {
-                PlayId = detail.PlayId,
                 UserId = detail.UserId,
-                BoardGameId = detail.BoardGameId,
-                Review = detail.Review,
-                IsReviewPrivate = detail.IsReviewPrivate,
-                Rating = detail.Rating
+                FirstName = detail.FirstName,
+                LastName = detail.LastName
             };
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PlayEdit model)
+        public ActionResult Edit(UserEdit model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var service = CreatePlayService();
-            if (service.UpdatePlay(model))
+            var service = CreateUserService();
+            if (service.UpdateUser(model))
                 return RedirectToAction("Index");
             else
             {
@@ -111,29 +103,28 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpGet]
         [ActionName("Delete")]
-        public ActionResult Delete(int playId)
+        public ActionResult Delete(Guid userId)
         {
-            var service = CreatePlayService();
-            var model = service.GetPlay(playId);
+            var service = CreateUserService();
+            var model = service.GetUser(userId);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public ActionResult DeletePlay(int playId)
+        public ActionResult DeleteUser(Guid userId)
         {
-            var service = CreatePlayService();
-            service.DeletePlay(playId);
+            var service = CreateUserService();
+            service.DeleteUser(userId);
             return RedirectToAction("Index");
         }
 
-        private PlayService CreatePlayService()
+        private UserService CreateUserService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new PlayService(userId);
+            var service = new UserService(userId);
             return service;
         }
-    } */
     }
 }

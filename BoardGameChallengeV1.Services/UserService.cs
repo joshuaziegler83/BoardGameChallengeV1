@@ -70,22 +70,19 @@ namespace BoardGameChallengeV1.Services
             }
         }
 
-        public PlayDetail GetPlay(int playId)
+        public UserDetail GetUser(Guid userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Plays
-                        .Single((e => e.PlayId == playId));
-                return new PlayDetail
+                        .Userers
+                        .Single((e => e.UserId == userId));
+                return new UserDetail
                 {
-                    PlayId = entity.PlayId,
                     UserId = entity.UserId,
-                    BoardGameId = entity.BoardGameId,
-                    Review = entity.Review,
-                    IsReviewPrivate = entity.IsReviewPrivate,
-                    Rating = entity.Rating
+                    FirstName = entity.FirstName,
+                    LastName = entity.LastName,
                 };
             }
         }
