@@ -10,11 +10,11 @@ namespace BoardGameChallengeV1.Services
 {
     public class PlayService
     {
-        private readonly Guid _userId;
+        private readonly Guid _ownerId;
 
-        public PlayService(Guid userId)
+        public PlayService(Guid ownerId)
         {
-            _userId = userId;
+            _ownerId = ownerId;
         }
 
         public bool CreatePlay(PlayCreate model)
@@ -22,7 +22,7 @@ namespace BoardGameChallengeV1.Services
             var entity =
                 new Play()
                 {
-                    UserId = _userId,
+                    UserId = _ownerId.ToString(),
                     BoardGameId = model.BoardGameId,
                     Review = model.Review,
                     IsReviewPrivate = model.IsReviewPrivate,
@@ -86,7 +86,7 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .Plays
-                        .Where(e => e.UserId == userId)
+                        .Where(e => e.UserId == _ownerId.ToString())
                         .Select(
                             e =>
                                 new PlayList

@@ -30,18 +30,18 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         // GET: Message By MessageId
-        public ActionResult GetMessagesByMessageId(int messageId)
+        public ActionResult GetMessagesByMessageId(int id)
         {
             var service = CreateMessageService();
-            var model = service.GetMessageByMessageId(messageId);
+            var model = service.GetMessageByMessageId(id);
             return View(model);
         }
 
         // GET: Details By MessageId
-        public ActionResult Details(int messageId)
+        public ActionResult Details(int id)
         {
             var service = CreateMessageService();
-            var model = service.GetMessageByMessageId(messageId);
+            var model = service.GetMessageByMessageId(id);
             return View(model);
         }
 
@@ -70,11 +70,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Edit(int messageId)
+        public ActionResult Edit(int id)
         {
             var service = CreateMessageService();
-            var detail = service.GetMessageByMessageId(messageId);
+            var detail = service.GetMessageByMessageId(id);
             var model = new MessageEdit
             {
                 MessageId = detail.MessageId,
@@ -87,7 +86,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(MessageEdit model)
+        public ActionResult Edit(int id, MessageEdit model)
         {
             if (!ModelState.IsValid)
             {
@@ -106,20 +105,20 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpGet]
         [ActionName("Delete")]
-        public ActionResult Delete(int messageId)
+        public ActionResult Delete(int id)
         {
             var service = CreateMessageService();
-            var model = service.GetMessageByMessageId(messageId);
+            var model = service.GetMessageByMessageId(id);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public ActionResult DeletePlay(int messageId)
+        public ActionResult DeletePlay(int id)
         {
             var service = CreateMessageService();
-            service.DeleteMessage(messageId);
+            service.DeleteMessage(id);
             return RedirectToAction("Index");
         }
 

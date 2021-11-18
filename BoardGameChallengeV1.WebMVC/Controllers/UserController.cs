@@ -12,18 +12,18 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private readonly Guid _userId;
+        private readonly Guid _ownerId;
 
-        public UserController(Guid userId)
+        public UserController(Guid ownerId)
         {
-            _userId = userId;
+            _ownerId = ownerId;
         }
 
         // GET: User
         public ActionResult Index()
         {
             var service = CreateUserService();
-            var model = service.GetUserByUserId(_userId);
+            var model = service.GetUserByUserId(_ownerId);
             return View(model);
         }
 
@@ -36,10 +36,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         // GET: Details By PlayId
-        public ActionResult Details(Guid userId)
+        public ActionResult Details(Guid _ownerId)
         {
             var service = CreateUserService();
-            var model = service.GetUserByUserId(userId);
+            var model = service.GetUserByUserId(_ownerId);
             return View(model);
         }
 
@@ -69,10 +69,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(Guid userId)
+        public ActionResult Edit(Guid _ownerId)
         {
             var service = CreateUserService();
-            var detail = service.GetUser(userId);
+            var detail = service.GetUser(_ownerId);
             var model = new UserEdit
             {
                 UserId = detail.UserId,
@@ -103,20 +103,20 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpGet]
         [ActionName("Delete")]
-        public ActionResult Delete(Guid userId)
+        public ActionResult Delete(Guid _ownerId)
         {
             var service = CreateUserService();
-            var model = service.GetUser(userId);
+            var model = service.GetUser(_ownerId);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public ActionResult DeleteUser(Guid userId)
+        public ActionResult DeleteUser(Guid _ownerId)
         {
             var service = CreateUserService();
-            service.DeleteUser(userId);
+            service.DeleteUser(_ownerId);
             return RedirectToAction("Index");
         }
 

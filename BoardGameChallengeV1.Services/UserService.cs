@@ -10,26 +10,26 @@ namespace BoardGameChallengeV1.Services
 {
     public class UserService
     {
-        private readonly Guid _userId;
+        private readonly Guid _ownerId;
 
-        public UserService(Guid userId)
+        public UserService(Guid ownerId)
         {
-            _userId = userId;
+            _ownerId = ownerId;
         }
 
         public bool CreateUser(UserCreate model)
         {
             var entity =
-                new User()
+                new ApplicationUser()
                 {
-                    UserId = _userId,
+                    UserId = _ownerId.ToString(),
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Userers.Add(entity);
+                ctx.Users.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -40,12 +40,12 @@ namespace BoardGameChallengeV1.Services
             {
                 var query =
                     ctx
-                        .Userers
+                        .Users
                         .Select(
                             e =>
                                 new UserList
                                 {
-                                    UserId = e.UserId,
+                                    UserId = _ownerId.ToString(),
                                     FirstName = e.FirstName,
                                     LastName = e.LastName,
                                 }
@@ -53,14 +53,14 @@ namespace BoardGameChallengeV1.Services
                 return query.ToArray();
             }
         }
-        public UserDetail GetUserByUserId(Guid userId)
+        public UserDetail GetUserByUserId(Guid _ownerId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Userers
-                        .Single((e => e.UserId == userId));
+                        .Users
+                        .Single((e => e.UserId == _ownerId.ToString()));
                 return new UserDetail
                 {
                     UserId = entity.UserId,
@@ -76,8 +76,8 @@ namespace BoardGameChallengeV1.Services
             {
                 var entity =
                     ctx
-                        .Userers
-                        .Single((e => e.UserId == userId));
+                        .Users
+                        .Single((e => e.UserId == _ownerId.ToString()));
                 return new UserDetail
                 {
                     UserId = entity.UserId,
@@ -93,8 +93,8 @@ namespace BoardGameChallengeV1.Services
             {
                 var entity =
                    ctx
-                       .Userers
-                       .Single(e => e.UserId == model.UserId);
+                       .Users
+                       .Single(e => e.UserId == _ownerId.ToString());
                 entity.UserId = model.UserId;
                 entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
@@ -108,9 +108,9 @@ namespace BoardGameChallengeV1.Services
             {
                 var entity =
                     ctx
-                        .Userers
-                        .Single(e => e.UserId == UserId);
-                ctx.Userers.Remove(entity);
+                        .Users
+                        .Single(e => e.UserId == _ownerId.ToString());
+                ctx.Users.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
         }

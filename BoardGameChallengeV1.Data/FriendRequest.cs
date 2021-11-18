@@ -12,13 +12,10 @@ namespace BoardGameChallengeV1.Data
     {
         [Key]
         public int FriendRequestId { get; set; }
-        [ForeignKey(nameof(User1))]
-        public Guid UserId1 { get; set; }
-        [ForeignKey(nameof(User2))]
-        public Guid UserId2 { get; set; }
+        public string UserId1 { get; set; }
+        public virtual ApplicationUser ApplicationUser1 { get; set; }
+        public string UserId2 { get; set; }
+        public virtual ApplicationUser ApplicationUser2 { get; set; }
         public bool IsAccepted { get; set; }
-        public virtual User User1 { get; set; }
-        public virtual User User2 { get; set; }
-        public virtual ICollection<Message> Messages { get; set; }
     }
 }

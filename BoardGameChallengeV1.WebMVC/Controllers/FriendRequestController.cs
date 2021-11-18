@@ -9,8 +9,10 @@ using System.Web.Mvc;
 
 namespace BoardGameChallengeV1.WebMVC.Controllers
 {
+    [Authorize]
     public class FriendRequestController : Controller
     {
+
         private readonly Guid _userId;
 
         public FriendRequestController(Guid userId)
@@ -27,10 +29,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         // GET: FriendRequest By FriendRequestId
-        public ActionResult Details(int friendRequestId)
+        public ActionResult Details(int id)
         {
             var service = CreateFriendRequestService();
-            var model = service.GetFriendRequestByFriendRequestId(friendRequestId);
+            var model = service.GetFriendRequestByFriendRequestId(id);
             return View(model);
         }
 
@@ -51,6 +53,8 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(FriendRequestCreate model)
         {
+            model.UserId1 = User.Identity.GetUserId();
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -68,10 +72,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int friendRequestId)
+        public ActionResult Edit(int id)
         {
             var service = CreateFriendRequestService();
-            var detail = service.GetFriendRequestByFriendRequestId(friendRequestId);
+            var detail = service.GetFriendRequestByFriendRequestId(id);
             var model = new FriendRequestEdit
             {
                 FriendRequestId = detail.FriendRequestId,
@@ -84,7 +88,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(FriendRequestEdit model)
+        public ActionResult Edit(int id, FriendRequestEdit model)
         {
             if (!ModelState.IsValid)
             {
@@ -103,20 +107,20 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpGet]
         [ActionName("Delete")]
-        public ActionResult Delete(int friendRequestId)
+        public ActionResult Delete(int id)
         {
             var service = CreateFriendRequestService();
-            var model = service.GetFriendRequestByFriendRequestId(friendRequestId);
+            var model = service.GetFriendRequestByFriendRequestId(id);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public ActionResult DeleteFriendRequest(int friendRequestId)
+        public ActionResult DeleteFriendRequest(int id)
         {
             var service = CreateFriendRequestService();
-            service.DeleteFriendRequest(friendRequestId);
+            service.DeleteFriendRequest(id);
             return RedirectToAction("Index");
         }
     }

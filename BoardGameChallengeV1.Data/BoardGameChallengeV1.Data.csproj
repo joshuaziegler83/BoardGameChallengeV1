@@ -61,18 +61,17 @@
     <Compile Include="FriendRequest.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="Migrations\202111131540349_Finishing up services.cs" />
-    <Compile Include="Migrations\202111131540349_Finishing up services.designer.cs">
-      <DependentUpon>202111131540349_Finishing up services.cs</DependentUpon>
+    <Compile Include="Migrations\202111180006379_initCreate.cs" />
+    <Compile Include="Migrations\202111180006379_initCreate.designer.cs">
+      <DependentUpon>202111180006379_initCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111132113210_Updated BoardGame Stuff.cs" />
-    <Compile Include="Migrations\202111132113210_Updated BoardGame Stuff.designer.cs">
-      <DependentUpon>202111132113210_Updated BoardGame Stuff.cs</DependentUpon>
+    <Compile Include="Migrations\202111180028007_userUpdated.cs" />
+    <Compile Include="Migrations\202111180028007_userUpdated.designer.cs">
+      <DependentUpon>202111180028007_userUpdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -100,11 +99,11 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111131540349_Finishing up services.resx">
-      <DependentUpon>202111131540349_Finishing up services.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111180006379_initCreate.resx">
+      <DependentUpon>202111180006379_initCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111132113210_Updated BoardGame Stuff.resx">
-      <DependentUpon>202111132113210_Updated BoardGame Stuff.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111180028007_userUpdated.resx">
+      <DependentUpon>202111180028007_userUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

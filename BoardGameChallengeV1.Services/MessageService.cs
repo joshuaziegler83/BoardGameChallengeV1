@@ -10,12 +10,13 @@ namespace BoardGameChallengeV1.Services
 {
     public class MessageService
     {
-        private readonly Guid _userId;
+        private readonly Guid _ownerId;
 
-        public MessageService(Guid userId)
+        public MessageService(Guid ownerId)
         {
-            _userId = userId;
+            _ownerId = ownerId;
         }
+
 
         public bool CreateMessage(MessageCreate model)
         {
@@ -80,7 +81,7 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .Messages
-                        .Where(e => e.UserId1 == userId1)
+                        .Where(e => e.UserId1 == _ownerId.ToString())
                         .Select(
                             e =>
                                 new MessageList
@@ -101,7 +102,7 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .Messages
-                        .Where(e => e.UserId1 == userId1 && e.UserId2 == userId2)
+                        .Where(e => e.UserId1 == _ownerId.ToString() && e.UserId2 == userId2.ToString())
                         .Select(
                             e =>
                                 new MessageList

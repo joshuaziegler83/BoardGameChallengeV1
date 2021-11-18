@@ -12,13 +12,6 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
     [Authorize]
     public class BoardGameController : Controller
     {
-        private readonly Guid _userId;
-
-        public BoardGameController(Guid userId)
-        {
-            _userId = userId;
-        }
-
         // GET: BoardGame
         public ActionResult Index()
         {
@@ -29,10 +22,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         // GET: BoardGameById
 
-        public ActionResult Details(int boardGameId)
+        public ActionResult Details(int id)
         {
             var service = CreateBoardGameService();
-            var model = service.GetBoardGameById(boardGameId);
+            var model = service.GetBoardGameById(id);
             return View(model);
         }
 
@@ -61,11 +54,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Edit(int boardGameId)
+        public ActionResult Edit(int id)
         {
             var service = CreateBoardGameService();
-            var detail = service.GetBoardGameById(boardGameId);
+            var detail = service.GetBoardGameById(id);
             var model = new BoardGameEdit
             {
                 BoardGameId = detail.BoardGameId,
@@ -79,7 +71,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(BoardGameEdit model)
+        public ActionResult Edit(int id, BoardGameEdit model)
         {
             if (!ModelState.IsValid)
             {
@@ -95,22 +87,22 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
                 return View(model);
             }
         }
-        [HttpGet]
+
         [ActionName("Delete")]
-        public ActionResult Delete(int boardGameId)
+        public ActionResult Delete(int id)
         {
             var service = CreateBoardGameService();
-            var model = service.GetBoardGameById(boardGameId);
+            var model = service.GetBoardGameById(id);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public ActionResult DeleteBoardGames(int boardGameId)
+        public ActionResult DeleteBoardGames(int id)
         {
             var service = CreateBoardGameService();
-            service.DeleteBoardGame(boardGameId);
+            service.DeleteBoardGame(id);
             return RedirectToAction("Index");
         }
 

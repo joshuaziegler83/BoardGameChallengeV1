@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BoardGameChallengeV1.Models.BoardGameList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.BoardGameId)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimesPlayed)
+        </th>
+        <th></th>
+    </tr>
+
+    @*<ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+        </ul>*@
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.BoardGameId)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+
+                @foreach (var play in item.Plays)
+                {
+                    <a href=@Url.Action("Details", "Controller", new { id = play.PlayId}, null)><img src="yourimg.jpg" /></a>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimesPlayed)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BoardGameId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.BoardGameId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BoardGameId })
+            </td>
+        </tr>
+    }
+
+</table>

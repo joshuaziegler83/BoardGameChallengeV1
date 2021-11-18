@@ -7,13 +7,13 @@ namespace BoardGameChallengeV1.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class UpdatedBoardGameStuff : IMigrationMetadata
+    public sealed partial class userUpdated : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdatedBoardGameStuff));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(userUpdated));
         
         string IMigrationMetadata.Id
         {
-            get { return "202111132113210_Updated BoardGame Stuff"; }
+            get { return "202111180028007_userUpdated"; }
         }
         
         string IMigrationMetadata.Source

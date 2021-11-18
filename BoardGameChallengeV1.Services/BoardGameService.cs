@@ -10,11 +10,11 @@ namespace BoardGameChallengeV1.Services
 {
     public class BoardGameService
     {
-        private readonly Guid _userId;
+        private readonly Guid _ownerId;
 
-        public BoardGameService(Guid userId)
+        public BoardGameService(Guid ownerId)
         {
-            _userId = userId;
+            _ownerId = ownerId;
         }
 
         public bool CreateBoardGame(BoardGameCreate model)
@@ -23,7 +23,7 @@ namespace BoardGameChallengeV1.Services
                 new BoardGame()
                 {
                     BoardGameId = model.BoardGameId,
-                    UserId = _userId,
+                    UserId = _ownerId.ToString(),
                     Name = model.Name,
                     Rating = model.Rating,
                     TimesPlayed = model.TimesPlayed
@@ -42,16 +42,17 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .BoardGames
-                        .Where(e=> e.UserId == _userId)
+                        .Where(e => e.UserId == _ownerId.ToString())
                         .Select(
                             e =>
                                 new BoardGameList
                                 {
                                     BoardGameId = e.BoardGameId,
-                                    UserId = _userId,
+                                    UserId = _ownerId.ToString(),
                                     Name = e.Name,
                                     Rating = e.Rating,
-                                    TimesPlayed = e.TimesPlayed
+                                    TimesPlayed = e.TimesPlayed,
+                                    Plays = e.Plays
                                 }
                                 );
                 return query.ToArray();
@@ -65,12 +66,12 @@ namespace BoardGameChallengeV1.Services
                 var entity =
                     ctx
                         .BoardGames
-                        .Single(e => e.BoardGameId == BoardGameId && e.UserId == _userId);
+                        .Single(e => e.BoardGameId == BoardGameId && e.UserId == _ownerId.ToString());
                 return
                     new BoardGameDetail
                     {
                         BoardGameId = entity.BoardGameId,
-                        UserId = _userId,
+                        UserId = _ownerId.ToString(),
                         Name = entity.Name,
                         Rating = entity.Rating,
                         TimesPlayed = entity.TimesPlayed
@@ -85,9 +86,9 @@ namespace BoardGameChallengeV1.Services
                 var entity =
                    ctx
                        .BoardGames
-                       .Single(e => e.BoardGameId == model.BoardGameId && e.UserId == _userId);
+                       .Single(e => e.BoardGameId == model.BoardGameId && e.UserId == _ownerId.ToString());
                 entity.BoardGameId = model.BoardGameId;
-                entity.UserId = _userId;
+                entity.UserId = _ownerId.ToString();
                 entity.Name = model.Name;
                 entity.Rating = model.Rating;
                 entity.TimesPlayed = model.TimesPlayed;
@@ -103,7 +104,7 @@ namespace BoardGameChallengeV1.Services
                 var entity =
                     ctx
                         .BoardGames
-                        .Single(e => e.BoardGameId == BoardGameId && e.UserId == _userId);
+                        .Single(e => e.BoardGameId == BoardGameId && e.UserId == _ownerId.ToString());
                 ctx.BoardGames.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

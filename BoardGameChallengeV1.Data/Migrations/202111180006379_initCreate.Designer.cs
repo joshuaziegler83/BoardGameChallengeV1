@@ -7,13 +7,13 @@ namespace BoardGameChallengeV1.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Finishingupservices : IMigrationMetadata
+    public sealed partial class initCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Finishingupservices));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202111131540349_Finishing up services"; }
+            get { return "202111180006379_initCreate"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,0 +1,50 @@
+﻿@model BoardGameChallengeV1.Models.FriendRequestDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FriendRequestDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FriendRequestId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FriendRequestId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAccepted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAccepted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FriendRequestId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

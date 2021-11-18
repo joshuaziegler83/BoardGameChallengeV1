@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BoardGameChallengeV1.Models.FriendRequestList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FriendRequestId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAccepted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FriendRequestId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAccepted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FriendRequestId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.FriendRequestId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.FriendRequestId })
+        </td>
+    </tr>
+}
+
+</table>

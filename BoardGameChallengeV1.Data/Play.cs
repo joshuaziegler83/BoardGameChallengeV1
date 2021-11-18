@@ -13,14 +13,14 @@ namespace BoardGameChallengeV1.Data
     {
         [Key]
         public int PlayId { get; set; }
-        [ForeignKey("User")]
-        public Guid UserId { get; set; }
+        [ForeignKey(nameof(ApplicationUser))]
+        public string UserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
         [ForeignKey("BoardGame")]
         public int BoardGameId { get; set; }
+        public virtual BoardGame BoardGame { get; set; }
         public string Review { get; set; }
         public bool IsReviewPrivate { get; set; }
         public double Rating { get; set; }
-        public virtual User User { get; set; }
-        public virtual BoardGame BoardGame { get; set; }
     }
 }

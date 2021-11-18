@@ -10,24 +10,24 @@ namespace BoardGameChallengeV1.Services
 {
     public class FriendRequestService
     {
-        private readonly Guid _userId;
+        private readonly Guid _ownerId;
 
-        public FriendRequestService(Guid userId)
+        public FriendRequestService(Guid ownerId)
         {
-            _userId = userId;
+            _ownerId = ownerId;
         }
 
-       public bool CreateFriendRequest(FriendRequestCreate model)
+        public bool CreateFriendRequest(FriendRequestCreate model)
         {
             var entity =
                 new FriendRequest()
                 {
                     FriendRequestId = model.FriendRequestId,
-                    UserId1 = model.UserId1,
+                    UserId1 = _ownerId.ToString(),
                     UserId2 = model.UserId2,
                     IsAccepted = model.IsAccepted
                 };
-            entity.Messages.Add(model.Message);
+           // entity.Messages.Add(model.Message);
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.FriendRequests.Add(entity);
@@ -42,7 +42,7 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .FriendRequests
-                        .Where(e => e.UserId1 == userId1)
+                        .Where(e => e.UserId1 == _ownerId.ToString())
                         .Select(
                             e =>
                                 new FriendRequestList

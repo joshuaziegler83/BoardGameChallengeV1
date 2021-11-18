@@ -9,8 +9,8 @@ namespace BoardGameChallengeV1.Models
     public class MessageEdit
     {
         public int MessageId { get; set; }
-        public Guid UserId1 { get; set; }
-        public Guid UserId2 { get; set; }
+        public string UserId1 { get; set; }
+        public string UserId2 { get; set; }
         public string Content { get; set; }
     }
 }

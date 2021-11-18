@@ -28,18 +28,18 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         // GET: Play By BoardGameId
-        public ActionResult GetPlaysByBoardGameId(int boardGameId)
+        public ActionResult GetPlaysByBoardGameId(int id)
         {
             var service = CreatePlayService();
-            var model = service.GetPlaysByBoardGameId(boardGameId);
+            var model = service.GetPlaysByBoardGameId(id);
             return View(model);
         }
 
         // GET: Details By PlayId
-        public ActionResult Details(int playId)
+        public ActionResult Details(int id)
         {
             var service = CreatePlayService();
-            var model = service.GetPlaysByBoardGameId(playId);
+            var model = service.GetPlaysByBoardGameId(id);
             return View(model);
         }
 
@@ -70,10 +70,10 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int playId)
+        public ActionResult Edit(int id)
         {
             var service = CreatePlayService();
-            var detail = service.GetPlay(playId);
+            var detail = service.GetPlay(id);
             var model = new PlayEdit
             {
                 PlayId = detail.PlayId,
@@ -88,7 +88,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PlayEdit model)
+        public ActionResult Edit(int id, PlayEdit model)
         {
             if (!ModelState.IsValid)
             {
@@ -107,20 +107,20 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
 
         [HttpGet]
         [ActionName("Delete")]
-        public ActionResult Delete(int playId)
+        public ActionResult Delete(int id)
         {
             var service = CreatePlayService();
-            var model = service.GetPlay(playId);
+            var model = service.GetPlay(id);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public ActionResult DeletePlay(int playId)
+        public ActionResult DeletePlay(int id)
         {
             var service = CreatePlayService();
-            service.DeletePlay(playId);
+            service.DeletePlay(id);
             return RedirectToAction("Index");
         }
 
