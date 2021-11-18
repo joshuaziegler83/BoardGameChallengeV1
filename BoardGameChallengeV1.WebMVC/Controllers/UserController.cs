@@ -14,10 +14,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
     {
         private readonly Guid _ownerId;
 
-        public UserController(Guid ownerId)
-        {
-            _ownerId = ownerId;
-        }
+       
 
         // GET: User
         public ActionResult Index()

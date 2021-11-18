@@ -16,11 +16,6 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
        
         private readonly Guid _userId;
 
-        public MessageController(Guid userId)
-        {
-            _userId = userId;
-        }
-
         // GET: Message
         public ActionResult Index()
         {

@@ -12,13 +12,7 @@ namespace BoardGameChallengeV1.WebMVC.Controllers
     [Authorize]
     public class FriendRequestController : Controller
     {
-
         private readonly Guid _userId;
-
-        public FriendRequestController(Guid userId)
-        {
-            _userId = userId;
-        }
 
         // GET: Friend
         public ActionResult Index()
