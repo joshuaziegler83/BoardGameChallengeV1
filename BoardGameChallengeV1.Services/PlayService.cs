@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoardGameChallengeV1.Services
 {
-    public class PlayService
+    public class PlayService : IPlayService
     {
         private readonly Guid _ownerId;
 
@@ -43,7 +43,7 @@ namespace BoardGameChallengeV1.Services
                     ctx
                         .Plays
                         .Single((e => e.PlayId == playId));
-               return new PlayDetail
+                return new PlayDetail
                 {
                     PlayId = entity.PlayId,
                     UserId = entity.UserId,
@@ -51,7 +51,7 @@ namespace BoardGameChallengeV1.Services
                     Review = entity.Review,
                     IsReviewPrivate = entity.IsReviewPrivate,
                     Rating = entity.Rating
-                };                                
+                };
             }
         }
 
@@ -62,7 +62,7 @@ namespace BoardGameChallengeV1.Services
                 var query =
                     ctx
                         .Plays
-                        .Where (e=> e.BoardGameId == BoardGameId)
+                        .Where(e => e.BoardGameId == BoardGameId)
                         .Select(
                             e =>
                                 new PlayList

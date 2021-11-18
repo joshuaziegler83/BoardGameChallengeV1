@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoardGameChallengeV1.Services
 {
-    public class MessageService
+    public class MessageService : IMessageService
     {
         private readonly Guid _ownerId;
 

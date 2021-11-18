@@ -59,6 +59,11 @@
   <ItemGroup>
     <Compile Include="BoardGameService.cs" />
     <Compile Include="FriendRequestService.cs" />
+    <Compile Include="IBoardGameService.cs" />
+    <Compile Include="IFriendRequestService.cs" />
+    <Compile Include="IMessageService.cs" />
+    <Compile Include="IPlayService.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="MessageService.cs" />
     <Compile Include="PlayService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

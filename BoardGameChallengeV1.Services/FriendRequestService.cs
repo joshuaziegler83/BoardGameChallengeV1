@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoardGameChallengeV1.Services
 {
-    public class FriendRequestService
+    public class FriendRequestService : IFriendRequestService
     {
         private readonly Guid _ownerId;
 
@@ -27,14 +27,14 @@ namespace BoardGameChallengeV1.Services
                     UserId2 = model.UserId2,
                     IsAccepted = model.IsAccepted
                 };
-           // entity.Messages.Add(model.Message);
+            // entity.Messages.Add(model.Message);
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.FriendRequests.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-        
+
         public IEnumerable<FriendRequestList> GetFriendRequestsByUserId(Guid userId1)
         {
             using (var ctx = new ApplicationDbContext())
